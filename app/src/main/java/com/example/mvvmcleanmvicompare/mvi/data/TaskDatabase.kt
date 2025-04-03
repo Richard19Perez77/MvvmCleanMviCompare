@@ -19,7 +19,7 @@ abstract class TaskDatabase : RoomDatabase() {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     TaskDatabase::class.java,
-                    "task_db"
+                    "mvi_task_db"
                 ).build().also { INSTANCE = it }
             }
     }
