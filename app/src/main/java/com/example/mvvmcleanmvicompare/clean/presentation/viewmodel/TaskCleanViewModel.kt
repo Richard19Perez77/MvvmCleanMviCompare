@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskViewModel @Inject constructor(
+class TaskCleanViewModel @Inject constructor(
     private val getAllTasks: GetAllTasksUseCase,
     private val addTask: AddTaskUseCase,
     private val deleteTask: DeleteTaskUseCase,
