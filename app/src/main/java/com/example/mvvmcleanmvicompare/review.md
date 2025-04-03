@@ -1,25 +1,23 @@
-# review of mvi mvvm and clean
+# Review of mvi mvvm and clean
 
-## project so far has folder structure that differs
+## Project folder structure
 
-- mvi and mvvm have root 
+- mvi and mvvm 
+  - data
+  - network
+  - ui
 
-data
-network
-ui
-
-- clean has root 
-
-data 
-domain
-presentation
+- clean 
+  - data 
+  - domain
+  - presentation
 
 ### mvvm and mvi are layered by concern, driven by ui
 
-practical app concerns
+- practical app concerns
 
 1. data/
-   2. includes local models, dao's databased
+   2. includes local models, dao's database
    3. app internal data handling
 4. network/ 
    5. retrofit services or fake api's
@@ -44,33 +42,29 @@ practical app concerns
 
 #### clean
 
-layered by abstraction, driven by domain
-
-with domain data and presentation
-
-design is with dependency inversion in mind
-
-- ui depends on domain
-- data depends on domain
-- but domain depends on nothing
+- Layered by abstraction, driven by domain
+- Design is with dependency inversion in mind
+  - ui depends on domain
+  - data depends on domain
+  - but domain depends on nothing
 
 1. domain/
-   2. pure business logic and use cases
-   3. no android or lib. dependencies
-   4. highly testable and reusable
-5. data/
-   6. actual implementations 
-      7. room, retrofit, local DB's
-   8. implements TaskRepository from domain
-   9. can be replaced swapped w/o touching business logic
-10. presentation/
-    11. view model + compose ui
-    12. talks to domain layer via use cases
-    13. holds ui state classes, navigation, etc.
+   1. pure business logic and use cases
+   2. no android or lib. dependencies
+   3. highly testable and reusable
+2. data/
+   1. actual implementations 
+      1. room, retrofit, local DB's
+   2. implements TaskRepository from domain
+   3. can be replaced swapped w/o touching business logic
+3.  presentation/
+    1.  view model + compose ui
+    2.  talks to domain layer via use cases
+    3.  holds ui state classes, navigation, etc.
 
-### summary table
+### Summary
 
-clean vs mvvm/mvi
+- clean vs mvvm and mvi
 
 focus with mvi is domain and business logic
 focus with mvvm mvi is ui and data flow
