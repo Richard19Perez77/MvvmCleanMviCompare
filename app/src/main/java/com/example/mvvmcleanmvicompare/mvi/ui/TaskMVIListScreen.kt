@@ -52,7 +52,7 @@ fun TaskMVIListScreen(viewModel: TaskMVIViewModel) {
             Button(onClick = {
                 viewModel.onEvent(TaskListEvent.SyncTasks)
             }) {
-                Text("Sync to Server")
+                Text("Sync")
             }
 
             Button(onClick = {

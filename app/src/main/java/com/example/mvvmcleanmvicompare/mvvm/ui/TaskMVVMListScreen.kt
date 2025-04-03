@@ -37,7 +37,7 @@ fun TaskMVVMListScreen(viewModel: TaskMVVMViewModel) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(onClick = { viewModel.syncToServer() }) {
-                Text("Sync to Server")
+                Text("Sync")
             }
             Button(onClick = { viewModel.loadRemoteTasks() }) {
                 Text("Load Remote")
