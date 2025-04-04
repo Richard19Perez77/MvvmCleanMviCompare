@@ -1,5 +1,6 @@
 package com.example.mvvmcleanmvicompare.mvvm
 
+import app.cash.turbine.test
 import com.example.mvvmcleanmvicompare.mvvm.data.TaskMVVM
 import com.example.mvvmcleanmvicompare.mvvm.data.TaskRepository
 import com.example.mvvmcleanmvicompare.mvvm.ui.TaskMVVMViewModel
@@ -7,11 +8,7 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -29,22 +26,20 @@ class TaskMVVMViewModelTest {
         viewModel = TaskMVVMViewModel(repo)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `tasks emits values from repository`() = runTest {
-        val collected = mutableListOf<List<TaskMVVM>>()
-        val job = launch {
-            viewModel.tasks.collect {
-                collected.add(it)
-            }
+    fun `tasks turbine 2 emits values from repository`() = runTest {
+        viewModel.tasks.test {
+            // First emission (initial empty list)
+            assertEquals(emptyList<TaskMVVM>(), awaitItem())
+
+            // Second emission (your mock data)
+            val tasks = awaitItem()
+            assertEquals(1, tasks.size)
+            assertEquals("Hello", tasks.first().title)
+
+            // Cancel to avoid infinite waiting
+            cancelAndIgnoreRemainingEvents()
         }
-
-        advanceUntilIdle() // Wait for emissions
-
-        assertEquals(1, collected.first().size)
-        assertEquals("Hello", collected.first().first().title)
-
-        job.cancel()
     }
 
 
