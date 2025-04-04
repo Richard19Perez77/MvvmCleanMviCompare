@@ -42,7 +42,6 @@ class TaskMVVMViewModelTest {
         }
     }
 
-
     @Test
     fun `addTask calls repository`() = runTest {
         viewModel.addTask("Test Title")
