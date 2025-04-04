@@ -50,4 +50,27 @@ class TaskMVIViewModelTest {
             viewModel.effect.first()
         )
     }
+
+    @Test
+    fun `DeleteTask calls repository`() = runTest {
+        val task = TaskMVI(id = 99, title = "To Delete")
+        viewModel.onEvent(TaskListEvent.DeleteTask(task))
+        coVerify { repo.deleteTask(task) }
+    }
+
+    @Test
+    fun `ToggleTask calls repository`() = runTest {
+        val task = TaskMVI(id = 42, title = "Toggle Me", isDone = false)
+        viewModel.onEvent(TaskListEvent.ToggleTask(task))
+        coVerify { repo.toggleTaskDone(task) }
+    }
+
+    @Test
+    fun `FetchRemoteTasks emits effect`() = runTest {
+        viewModel.onEvent(TaskListEvent.FetchRemoteTasks)
+        assertEquals(
+            TaskListEffect.ShowMessage("Fetched from remote"),
+            viewModel.effect.first()
+        )
+    }
 }
