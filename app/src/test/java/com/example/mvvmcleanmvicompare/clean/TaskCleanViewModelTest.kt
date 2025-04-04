@@ -12,7 +12,6 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -41,7 +40,6 @@ import org.junit.Test
  *      harder or impossible in MVVM w/o verifying internals or dealing with raw flows
  *      clean gives you narrower, more precise tests
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 class TaskCleanViewModelTest {
 
     private val getAllTasks = mockk<GetAllTasksUseCase>()
