@@ -62,7 +62,7 @@
     2.  talks to domain layer via use cases
     3.  holds ui state classes, navigation, etc.
 
-### Summary
+### Summary of differences
 
 - clean vs mvvm and mvi
 
@@ -86,4 +86,35 @@ reusability in mvvm mvi is limited outside of Android
 
 dependency direction in clean is UI -> UseCase -> Domain -> Data
 dependency direction in mvvm mvi is UI -> ViewModel -> Repository
+
+## testing
+
+1. mvvm
+   2. logic separation is lacking with view model doing too much
+   3. ui state traceability is problematic because the UI state is often inferred
+   4. business logic isolation is poor and can leak into view model
+5. mvi
+   6. business logic still lives in view model
+7. clean
+   8. view model, logic separation, and mocking ease is good
+   9. ui state traceability, and business logic isolation is good 
+
+### testing coverage potential
+
+1. mvvm 
+   2. will lack coverage in ui state flow being manual
+   3. will have business rules and use cases in view model, that's problematic
+   4. one off effects will need manual testing
+5. mvi
+   6. testing is easier but business rules in view model make it more difficult
+7. clean
+   8. less problematic than both
+
+mvvm: easiest to start with, vm testing is fine but logic can blur
+mvi: better for ui state predictability and event-driven testing
+clean: most modular, best for unit testing use cases, repo's and state separately
+
+unit test examples for one of the view model
+use case test setup
+or instrumented ui tests to compare behaviour visually
 

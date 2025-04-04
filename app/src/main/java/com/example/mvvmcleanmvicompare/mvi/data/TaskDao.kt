@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM tasks_mvi")
-    fun getAllTasks(): Flow<List<Task>>
+    fun getAllTasks(): Flow<List<TaskMVI>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(task: Task)
+    suspend fun insert(task: TaskMVI)
 
     @Delete
-    suspend fun delete(task: Task)
+    suspend fun delete(task: TaskMVI)
 
     @Update
-    suspend fun update(task: Task)
+    suspend fun update(task: TaskMVI)
 }

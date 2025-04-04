@@ -8,13 +8,13 @@ class TaskRepository(
     private val dao: TaskDao,
     private val api: FakeApiService // Injected
 ) {
-    val allTasks: Flow<List<Task>> = dao.getAllTasks()
+    val allTasks: Flow<List<TaskMVVM>> = dao.getAllTasks()
 
-    suspend fun addTask(task: Task) = dao.insert(task)
+    suspend fun addTask(task: TaskMVVM) = dao.insert(task)
 
-    suspend fun deleteTask(task: Task) = dao.delete(task)
+    suspend fun deleteTask(task: TaskMVVM) = dao.delete(task)
 
-    suspend fun toggleTaskDone(task: Task) =
+    suspend fun toggleTaskDone(task: TaskMVVM) =
         dao.update(task.copy(isDone = !task.isDone))
 
     suspend fun syncWithServer() {

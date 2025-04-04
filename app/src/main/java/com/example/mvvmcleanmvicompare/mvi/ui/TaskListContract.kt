@@ -1,6 +1,6 @@
 package com.example.mvvmcleanmvicompare.mvi.ui
 
-import com.example.mvvmcleanmvicompare.mvi.data.Task
+import com.example.mvvmcleanmvicompare.mvi.data.TaskMVI
 
 /**
  * Represents the different events that can occur on the TaskListScreen.
@@ -32,8 +32,8 @@ sealed class TaskListEvent {
     data object SyncTasks : TaskListEvent()
     data object FetchRemoteTasks : TaskListEvent()
     data class AddTask(val title: String) : TaskListEvent()
-    data class ToggleTask(val task: Task) : TaskListEvent()
-    data class DeleteTask(val task: Task) : TaskListEvent()
+    data class ToggleTask(val task: TaskMVI) : TaskListEvent()
+    data class DeleteTask(val task: TaskMVI) : TaskListEvent()
 }
 
 /**
@@ -45,7 +45,7 @@ sealed class TaskListEvent {
  *
  */
 data class TaskListState(
-    val tasks: List<Task> = emptyList(),
+    val tasks: List<TaskMVI> = emptyList(),
     val isLoading: Boolean = false
 )
 

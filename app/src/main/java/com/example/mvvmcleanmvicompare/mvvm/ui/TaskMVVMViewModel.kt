@@ -2,7 +2,7 @@ package com.example.mvvmcleanmvicompare.mvvm.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mvvmcleanmvicompare.mvvm.data.Task
+import com.example.mvvmcleanmvicompare.mvvm.data.TaskMVVM
 import com.example.mvvmcleanmvicompare.mvvm.data.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -23,17 +23,17 @@ class TaskMVVMViewModel @Inject constructor(
 
     fun addTask(title: String) {
         viewModelScope.launch {
-            repository.addTask(Task(title = title))
+            repository.addTask(TaskMVVM(title = title))
         }
     }
 
-    fun deleteTask(task: Task) {
+    fun deleteTask(task: TaskMVVM) {
         viewModelScope.launch {
             repository.deleteTask(task)
         }
     }
 
-    fun toggleTask(task: Task) {
+    fun toggleTask(task: TaskMVVM) {
         viewModelScope.launch {
             repository.toggleTaskDone(task)
         }

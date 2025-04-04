@@ -2,7 +2,7 @@ package com.example.mvvmcleanmvicompare.mvi.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mvvmcleanmvicompare.mvi.data.Task
+import com.example.mvvmcleanmvicompare.mvi.data.TaskMVI
 import com.example.mvvmcleanmvicompare.mvi.data.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -38,7 +38,7 @@ class TaskMVIViewModel @Inject constructor(
             }
             is TaskListEvent.AddTask -> {
                 viewModelScope.launch {
-                    repository.addTask(Task(title = event.title))
+                    repository.addTask(TaskMVI(title = event.title))
                 }
             }
             is TaskListEvent.DeleteTask -> {
