@@ -10,6 +10,22 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * MVVM ViewModel for managing tasks.
+ *
+ *  Architecture
+ *      Uses stateIn to share state across observers. Focuses on reactive flows for observing allTasks.
+ *
+ *  Strengths
+ *      It is simpler to implement and requires less boilerplate code than other approaches.
+ *
+ *  Weaknesses
+ *      Managing side-effects or more complex UI interactions can become challenging without dedicated handling.
+ *
+ *  Suitability
+ *      Best for projects requiring a clean, minimal implementation with limited UI complexity.
+ *
+ */
 @HiltViewModel
 class TaskMVVMViewModel @Inject constructor(
     private val repository: TaskRepository

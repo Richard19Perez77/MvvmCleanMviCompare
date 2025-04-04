@@ -12,6 +12,19 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ *  Architecture
+ *      Follows the Unidirectional Data Flow (UDF) pattern. Events trigger actions, effects capture side-effects, and states are updated after processing.
+ *
+ *  Strengths
+ *      Better suited for complex UI interactions. The Channel ensures proper handling of side effects or one-time effects.
+ *
+ *  Weaknesses
+ *      Slightly more verbose and complex due to event and effect management.
+ *
+ *  Suitability
+ *      Ideal for applications where predictable state transitions and one-time events are crucial.
+ */
 @HiltViewModel
 class TaskMVIViewModel @Inject constructor(
     private val repository: TaskRepository

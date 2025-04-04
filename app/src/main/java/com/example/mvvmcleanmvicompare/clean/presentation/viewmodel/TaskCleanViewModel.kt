@@ -10,6 +10,22 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Clean architecture allows view model to load initial tasks, uiState reflects repo data.
+ *
+ *  Architecture
+ *      Explicitly segregates use cases and domain logic. State updates are handled through MutableStateFlow and onEach.
+ *
+ *  Strengths
+ *      Promotes testable, modular code by emphasizing the separation of concerns. Encourages the use of use cases for feature-specific logic.
+ *
+ *  Weaknesses
+ *      More verbose than MVVM or MVI, which can increase development overhead.
+ *
+ *  Suitability
+ *      Best for large-scale apps with intricate business logic and requirements for maintainability.
+ *
+ */
 @HiltViewModel
 class TaskCleanViewModel @Inject constructor(
     private val getAllTasks: GetAllTasksUseCase,

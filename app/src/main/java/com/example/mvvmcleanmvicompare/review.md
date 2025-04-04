@@ -118,3 +118,5 @@ unit test examples for one of the view model
 use case test setup
 or instrumented ui tests to compare behaviour visually
 
+### overview of all 3 view models and testing
+
