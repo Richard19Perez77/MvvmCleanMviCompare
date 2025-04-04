@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,82 +40,85 @@ enum class Architecture {
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             MvvmCleanMviCompareTheme {
 
                 var selectedArch by remember { mutableStateOf<Architecture?>(Architecture.MVVM) }
 
-                Column {
+                Scaffold { paddingValues ->
+                    Column(modifier = Modifier.padding(paddingValues)) {
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Button(
-                            onClick = { selectedArch = Architecture.MVVM },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = if (selectedArch == Architecture.MVVM) {
-                                    MaterialTheme.colorScheme.primary
-                                } else {
-                                    MaterialTheme.colorScheme.secondary
-                                }
-                            )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Text("MVVM")
-                        }
-
-                        Button(
-                            onClick = { selectedArch = Architecture.MVI },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = if (selectedArch == Architecture.MVI) {
-                                    MaterialTheme.colorScheme.primary
-                                } else {
-                                    MaterialTheme.colorScheme.secondary
-                                }
-                            )
-                        ) {
-                            Text("MVI")
-                        }
-
-                        Button(
-                            onClick = { selectedArch = Architecture.CLEAN },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = if (selectedArch == Architecture.CLEAN) {
-                                    MaterialTheme.colorScheme.primary
-                                } else {
-                                    MaterialTheme.colorScheme.secondary
-                                }
-                            )
-                        ) {
-                            Text("Clean")
-                        }
-                    }
-
-                    Crossfade(
-                        targetState = selectedArch,
-                        animationSpec = tween(500)
-                    ) { arch ->
-                        when (arch) {
-                            Architecture.MVVM -> {
-                                val viewModel: TaskMVVMViewModel = hiltViewModel()
-                                TaskMVVMListScreen(viewModel)
-                            }
-
-                            Architecture.MVI -> {
-                                val viewModel: TaskMVIViewModel = hiltViewModel()
-                                TaskMVIListScreen(viewModel)
-                            }
-
-                            Architecture.CLEAN -> {
-                                val viewModel: TaskCleanViewModel = hiltViewModel()
-                                TaskCleanListScreen(
-                                    viewModel
+                            Button(
+                                onClick = { selectedArch = Architecture.MVVM },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = if (selectedArch == Architecture.MVVM) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else {
+                                        MaterialTheme.colorScheme.secondary
+                                    }
                                 )
+                            ) {
+                                Text("MVVM")
                             }
 
-                            null -> {}
+                            Button(
+                                onClick = { selectedArch = Architecture.MVI },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = if (selectedArch == Architecture.MVI) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else {
+                                        MaterialTheme.colorScheme.secondary
+                                    }
+                                )
+                            ) {
+                                Text("MVI")
+                            }
+
+                            Button(
+                                onClick = { selectedArch = Architecture.CLEAN },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = if (selectedArch == Architecture.CLEAN) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else {
+                                        MaterialTheme.colorScheme.secondary
+                                    }
+                                )
+                            ) {
+                                Text("Clean")
+                            }
+                        }
+
+                        Crossfade(
+                            targetState = selectedArch,
+                            animationSpec = tween(500)
+                        ) { arch ->
+                            when (arch) {
+                                Architecture.MVVM -> {
+                                    val viewModel: TaskMVVMViewModel = hiltViewModel()
+                                    TaskMVVMListScreen(viewModel)
+                                }
+
+                                Architecture.MVI -> {
+                                    val viewModel: TaskMVIViewModel = hiltViewModel()
+                                    TaskMVIListScreen(viewModel)
+                                }
+
+                                Architecture.CLEAN -> {
+                                    val viewModel: TaskCleanViewModel = hiltViewModel()
+                                    TaskCleanListScreen(
+                                        viewModel
+                                    )
+                                }
+
+                                null -> {}
+                            }
                         }
                     }
                 }
